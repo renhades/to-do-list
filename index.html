@@ -15,51 +15,49 @@
   </head>  
 
   <body>
-    <h1>Angular 學習日誌！</h1>
+    <div class="container">
+      <h1>Angular 學習日誌</h1>
 
-    <div id="blockOne" style="border: 2px solid red;
-                              height: 100px;
-                              padding: 10px;">
-      <h2>一、Angular say Hello to: {{ yourName }}</h2>
-      <label>請輸入你的姓名：</label>
-      <input type="text" ng-model="yourName" />
-    </div>
-
-    <!-- Todo Controller -->
-    <div id="blockTwo" style="border: 2px solid black;
-                              height: 500px;
-                              padding: 10px"
-         ng-controller="TodoCtrl">
-      <h2>二、To-do-list</h2>
-
-      <!-- Add item to to-do-list -->
-      <form ng-submit="addItem()">
-        <input type="text" ng-model="newItem" name="newItem" />
-        <input type="submit" id="submit" value="新增代辦事項" />
-        <!-- to-do-list -->
-        <h2>To do list!</h2>
-        <ul id="todo"
-            style="border: 2px solid green">
-          <li ng-repeat="item in todoList | filter: { isFinish: false }">
-            <div ng-hide="item.editing">
-              <input type="checkbox" ng-click="removeItem(item)" />
-              <span ng-dblclick="edit(item)" style="border: 2px solid blue;">{{ item.label }}</span>
-            </div>
-
-            <div ng-show="item.editing">
-              <input type="text" value="{{ item.label }}" ng-model="item.label" style="border: 2px solid blue;" />
-              <button ng-click="save(item)">儲存</button>
-            </div>
-          </li>
-        </ul>
-        <!-- finished list -->
-        <h2>Finished!</h2>
-        <ul id="finish" style="border: 2px solid green">
-          <li ng-repeat="item in todoList | filter: { isFinish: true }">
-            {{ item.label }}
-          </li>
-        </ul>
-      </form>
+      <div class="row">
+        <div id="blockOne">
+          <h2 class="card-panel">一、Angular say Hello to <span class="blue-text text-darken-2">{{ yourName }}</span></h2>
+          <label>請輸入你的姓名：</label>
+          <input type="text" ng-model="yourName" />
+        </div>
+      </div>
+      <div class="row">
+        <!-- Todo Controller -->
+        <div id="blockTwo" ng-controller="TodoCtrl">
+          <h2>二、To-do-list</h2>
+          <!-- Add item to to-do-list -->
+          <form ng-submit="addItem()">
+            <input type="text" ng-model="newItem" name="newItem" />
+            <input type="submit" id="submit" value="新增代辦事項" />
+            <!-- to-do-list -->
+            <h2>To do list!</h2>
+            <ul id="todo">
+              <li ng-repeat="item in todoList | filter: { isFinish: false }">
+                <!-- Checkbox -->
+                <div ng-hide="item.editing">
+                  <input id="to-do-item" class="filled-in" type="checkbox" ng-click="removeItem(item)" /><label for="to-do-item" ng-dblclick="edit(item)">{{ item.label }}</label>
+                </div>
+                <!-- Edit -->
+                <div ng-show="item.editing">
+                  <input type="text" value="{{ item.label }}" ng-model="item.label" />
+                  <button ng-click="save(item)">儲存</button>
+                </div>
+              </li>
+            </ul>
+            <!-- finished list -->
+            <h2>Finished!</h2>
+            <ul id="finish">
+              <li ng-repeat="item in todoList | filter: { isFinish: true }">
+                {{ item.label }}
+              </li>
+            </ul>
+          </form>
+        </div> 
+      </div>
     </div>
   </body>
 </html>  
